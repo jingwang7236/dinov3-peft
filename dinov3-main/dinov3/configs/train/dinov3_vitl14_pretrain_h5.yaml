@@ -45,7 +45,8 @@ gram:
 
 train:
   batch_size_per_gpu: 32  # Adjust based on GPU memory (ViT-L is heavy)
-  dataset_path: "/path/to/your/h5/data/root" # <--- REPLACE WITH YOUR H5 ROOT PATH
+  dataset_path: "H5Dataset:root=/mnt/data/h5_data:split=TRAIN"
+  h5_key: null            # Key in H5 file containing image data. Set to null for auto-detect.
   saveckp_freq: 10        # Save checkpoint every 10 epochs
   seed: 42
   num_workers: 8
@@ -62,10 +63,6 @@ train:
   cudagraphs: false
   cell_augmentation: false
   sharded_eval_checkpoint: true
-  
-  # H5 Dataset Specific Configs (Passed to H5Dataset constructor)
-  dataset_type: "h5"      # Ensure your data loader factory supports "h5"
-  h5_key: "image"         # Key in H5 file containing image data. Set to null for auto-detect.
 
 student:
   arch: vit_large         # <--- ViT-Large Architecture

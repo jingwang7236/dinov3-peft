@@ -77,6 +77,8 @@ def _parse_dataset_str(dataset_str: str):
         class_ = TiffDataset
     elif name == "H5Dataset":
         class_ = H5Dataset
+        if "split" in kwargs:
+            kwargs["split"] = H5Dataset.Split[kwargs["split"]]
     else:
         raise ValueError(f'Unsupported dataset "{name}"')
 
@@ -106,7 +108,7 @@ def make_dataset(
 
     class_, kwargs = _parse_dataset_str(dataset_str)
     dataset = class_(transform=transform, target_transform=target_transform, transforms=transforms, **kwargs)
-
+    
     logger.info(f"# of dataset samples: {len(dataset):,d}")
 
     # Aggregated datasets do not expose (yet) these attributes, so add them.
