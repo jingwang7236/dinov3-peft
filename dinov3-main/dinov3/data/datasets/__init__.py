@@ -9,3 +9,4 @@ from .image_net import ImageNet
 from .image_net_22k import ImageNet22k
 from .nyu import NYU
 from .tiff_dataset import TiffDataset
+from .h5_dataset import H5Dataset
